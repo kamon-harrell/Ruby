@@ -63,24 +63,6 @@ def left_room
   end
 end
 
-# def right_room
-#   puts "You open the door, and another torch flicks to life."
-#   puts "This room is empty, except for a door to your left, and the door you came through."
-#
-#   print "> "
-#   choice = $stdin.gets.chomp
-#
-#   if choice == "left door"
-#     puts "You choose the only door, and open it."
-#     left_two
-#   elsif choice == "go back"
-#     puts "You go back to the room you were last in."
-#     first_room
-#   else
-#     dead("You stumble around in the room until you starve.")
-#   end
-# end
-
 def center_room
   puts "You open the door, and another torch flicks to life."
   puts "This room is empty, except for a door to your left."
@@ -101,14 +83,36 @@ def left_two
 end
 
 def center_left
-  puts "You open the door, and another torch flicks to life."
-  puts "This room has a door to your right, and one in front of you."
+  puts "As you walk into the room, you hear a switch activated by your foot!"
 
-  print "> "
+  dodge = rand(1..100)
+  puts "You must roll less than a 70 in order to dodge the trap."
+  puts "Are you ready to roll?"
+  print  "> "
   choice = $stdin.gets.chomp
 
+  if choice == "yes"
+    puts "Rolling"
+  elsif choice == "no"
+    puts "To bad!"
+  end
+
+  puts dodge
+
+  if dodge <= 70
+    puts "You dodge the swinging trap successfully!"
+    puts "Now that thats out of the way..."
+    puts "You see this room has a door to your right, and one in front of you."
+    puts "Which do you choose?"
+
+    print "> "
+    choice = $stdin.gets.chomp
+  else dodge >= 71
+    dead("You get impaled by a swinging axe!")
+  end
+
   if choice == "front door"
-    puts "You choose the only door, and open it."
+    puts "You choose the front door."
     back_left
   elsif choice == "right door"
     puts "You pick the door to your right."
